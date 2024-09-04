@@ -1,5 +1,5 @@
 Purpose:
-This README file provides an overview of the sample Power BI report, its purpose, data sources, and key visualizations.
+This README file provides an overview of the sample Power BI report, data sources, and key visualizations.
 
 Data Sources:
 
