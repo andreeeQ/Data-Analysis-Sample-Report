@@ -1,0 +1,9 @@
+let
+    Source = Csv.Document(File.Contents("C:\Users\andre\Downloads\DICT x DSA AW - Dataset\DICT x DSA AW - Dataset\AW Dataset\AW_Customer.csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"CustomerKey", Int64.Type}, {"Customer ID", type text}, {"Customer", type text}, {"City", type text}, {"State-Province", type text}, {"Country-Region", type text}, {"Postal Code", type text}}),
+    #"Inserted Text Before Delimiter" = Table.AddColumn(#"Changed Type", "Text Before Delimiter", each Text.BeforeDelimiter([Customer], " "), type text),
+    #"Renamed Columns" = Table.RenameColumns(#"Inserted Text Before Delimiter",{{"Text Before Delimiter", "Firstname"}}),
+    #"Uppercased Text" = Table.TransformColumns(#"Renamed Columns",{{"Country-Region", Text.Upper, type text}})
+in
+    #"Uppercased Text"
